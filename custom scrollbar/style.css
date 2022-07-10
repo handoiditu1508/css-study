@@ -1,0 +1,44 @@
+body {
+  height: 200vh;
+}
+
+.container {
+  width: 75vw;
+  height: 80vh;
+  border: 1px solid black;
+  background: antiquewhite;
+  overflow: scroll;
+}
+
+.container img {
+  width: 100vmax;
+  height: 100vmax;
+}
+
+.container::-webkit-scrollbar {
+  width: 2em;
+  height: 2em;
+}
+
+.container::-webkit-scrollbar-track {
+  background: greenyellow;
+  border-radius: 100vw;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: rgb(0, 128, 0);
+  border-radius: 100vw;
+  border: 0.25em solid greenyellow;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 128, 0, 0.8);
+}
+
+.container::-webkit-scrollbar-button {
+  background: red;
+}
+
+.container::-webkit-scrollbar-corner {
+  background: blue;
+}
