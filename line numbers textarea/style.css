@@ -32,7 +32,6 @@
 
 textarea {
   resize: none;
-  width: 400px;
   height: 100%;
   white-space: pre;
   border: none;
