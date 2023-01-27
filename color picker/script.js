@@ -14,10 +14,10 @@ let hueCtx = hueCanvas.getContext("2d");
 let hueCursor = document.getElementById("hue-cursor");
 let hueRect = hueCanvas.getBoundingClientRect();
 
-let currentColor = "";
+let currentColor = "#ffffff";
 let hue = 0;
-let saturation = 1;
-let lightness = .5;
+let saturation = 0;
+let lightness = 1;
 
 let rgbFields = document.getElementById("rgb-fields");
 let hexField = document.getElementById("hex-field");
@@ -46,6 +46,7 @@ class ColorPicker {
     this.addDefaultSwatches();
     createShadeSpectrum();
     createHueSpectrum();
+    setCurrentColor(currentColor);
   }
   addDefaultSwatches() {
     for (let i = 0; i < this.defaultSwatches.length; i++) {
@@ -61,7 +62,7 @@ function createSwatch(target, color) {
   swatch.style.backgroundColor = color;
   swatch.addEventListener("click", function () {
     let color = tinycolor(this.style.backgroundColor);
-    colorToPos(color);
+    colorToPosition(color);
     setColorValues(color);
   });
   target.appendChild(swatch);
@@ -75,8 +76,8 @@ function refreshElementRects() {
 }
 
 function createShadeSpectrum(color) {
-  canvas = spectrumCanvas;
-  ctx = spectrumCtx;
+  let canvas = spectrumCanvas;
+  let ctx = spectrumCtx;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (!color) {
@@ -126,10 +127,14 @@ function colorToHue(color) {
   return hueString;
 }
 
-function colorToPos(color) {
+function colorToPosition(color) {
   color = tinycolor(color);
   let hsl = color.toHsl();
-  hue = hsl.h;
+  let rgb = color.toRgb();
+  let isBlackWhite = rgb.r === rgb.g && rgb.g === rgb.b
+  if (!isBlackWhite) {
+    hue = hsl.h;
+  }
   let hsv = color.toHsv();
   let x = spectrumRect.width * hsv.s;
   let y = spectrumRect.height * (1 - hsv.v);
@@ -137,7 +142,9 @@ function colorToPos(color) {
   updateSpectrumCursor(x, y);
   updateHueCursor(hueY);
   setCurrentColor(color);
-  createShadeSpectrum(colorToHue(color));
+  if (!isBlackWhite) {
+    createShadeSpectrum(colorToHue(color));
+  }
 }
 
 function setColorValues(color) {
@@ -153,11 +160,13 @@ function setColorValues(color) {
 
 function setCurrentColor(color) {
   color = tinycolor(color);
-  currentColor = color;
+  currentColor = color.toHexString();
   colorIndicator.style.backgroundColor = color;
   document.body.style.backgroundColor = color;
   spectrumCursor.style.backgroundColor = color;
-  hueCursor.style.backgroundColor = `hsl(${color.toHsl().h}, 100%, 50%)`;
+
+  let hueColor = tinycolor(`hsl ${hue} 1 .5`);
+  hueCursor.style.backgroundColor = hueColor;
 }
 
 function updateHueCursor(y) {
@@ -233,8 +242,8 @@ function getHueColor(e) {
   let hueColor = tinycolor(`hsl ${hue} 1 .5`).toHslString();
   let color = tinycolor(`hsl ${hue} ${saturation} ${lightness}`).toHslString();
   createShadeSpectrum(hueColor);
-  updateHueCursor(y, hueColor);
-  setCurrentColor(color)
+  updateHueCursor(y);
+  setCurrentColor(color);
   setColorValues(color);
 }
 
@@ -245,17 +254,17 @@ function endGetHueColor(e) {
 
 red.addEventListener("change", function () {
   let color = tinycolor(`rgb ${red.value} ${green.value} ${blue.value}`);
-  colorToPos(color);
+  colorToPosition(color);
 });
 
 green.addEventListener("change", function () {
   let color = tinycolor(`rgb ${red.value} ${green.value} ${blue.value}`);
-  colorToPos(color);
+  colorToPosition(color);
 });
 
 blue.addEventListener("change", function () {
   let color = tinycolor(`rgb ${red.value} ${green.value} ${blue.value}`);
-  colorToPos(color);
+  colorToPosition(color);
 });
 
 addSwatch.addEventListener("click", function () {
