@@ -27,26 +27,32 @@ let blue = document.getElementById("blue");
 let green = document.getElementById("green");
 let hex = document.getElementById("hex");
 
-function ColorPicker() {
-  this.addDefaultSwatches();
-  createShadeSpectrum();
-  createHueSpectrum();
+class ColorPicker {
+  defaultSwatches = [
+    "#FFFFFF",
+    "#FFFB0D",
+    "#0532FF",
+    "#FF9300",
+    "#00F91A",
+    "#FF2700",
+    "#000000",
+    "#686868",
+    "#EE5464",
+    "#D27AEE",
+    "#5BA8C4",
+    "#E64AA9"
+  ];
+  constructor() {
+    this.addDefaultSwatches();
+    createShadeSpectrum();
+    createHueSpectrum();
+  }
+  addDefaultSwatches() {
+    for (let i = 0; i < this.defaultSwatches.length; i++) {
+      createSwatch(swatches, this.defaultSwatches[i]);
+    }
+  }
 }
-
-ColorPicker.prototype.defaultSwatches = [
-  "#FFFFFF",
-  "#FFFB0D",
-  "#0532FF",
-  "#FF9300",
-  "#00F91A",
-  "#FF2700",
-  "#000000",
-  "#686868",
-  "#EE5464",
-  "#D27AEE",
-  "#5BA8C4",
-  "#E64AA9"
-]
 
 function createSwatch(target, color) {
   let swatch = document.createElement("button");
@@ -62,11 +68,6 @@ function createSwatch(target, color) {
   refreshElementRects();
 }
 
-ColorPicker.prototype.addDefaultSwatches = function () {
-  for (let i = 0; i < this.defaultSwatches.length; i++) {
-    createSwatch(swatches, this.defaultSwatches[i]);
-  }
-}
 
 function refreshElementRects() {
   spectrumRect = spectrumCanvas.getBoundingClientRect();
