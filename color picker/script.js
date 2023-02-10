@@ -188,8 +188,8 @@ let startGetSpectrumColor = function (e) {
 function getSpectrumColor(e) {
   e.preventDefault();
 
-  let x = e.pageX - spectrumRect.left;
-  let y = e.pageY - spectrumRect.top;
+  let x = e.pageX - (spectrumRect.left + window.scrollX);
+  let y = e.pageY - (spectrumRect.top + window.scrollY);
 
   if (x > spectrumRect.width) {
     x = spectrumRect.width;
@@ -201,7 +201,7 @@ function getSpectrumColor(e) {
     y = spectrumRect.height;
   }
   if (y < 0) {
-    y = .1;
+    y = 0;
   }
 
   let xRatio = x / spectrumRect.width * 100;
