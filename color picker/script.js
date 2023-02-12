@@ -201,7 +201,7 @@ function getSpectrumColor(e) {
     y = spectrumRect.height;
   }
   if (y < 0) {
-    y = 0;
+    y = .1;
   }
 
   let xRatio = x / spectrumRect.width * 100;
