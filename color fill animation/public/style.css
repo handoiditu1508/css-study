@@ -1,0 +1,43 @@
+button {
+  padding: 0.5rem 1rem;
+  margin-bottom: 3rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.mask-container {
+  position: relative;
+}
+
+.color-image {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/color-image.jpg");
+  background-size: cover;
+
+  mask-image: url("images/image-mask.png");
+  -webkit-mask-image: url("images/image-mask.png");
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  mask-position: 0% 0%;
+  -webkit-mask-position: 0% 0%;
+}
+
+.mask-animation {
+  animation: addColor 700ms steps(24) forwards;
+}
+
+@keyframes addColor {
+  0% {
+    mask-position: 0% 0%;
+    -webkit-mask-position: 0% 0%;
+  }
+
+  100% {
+    mask-position: 100% 0%;
+    -webkit-mask-position: 100% 0%;
+  }
+}
