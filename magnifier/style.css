@@ -1,0 +1,25 @@
+body{
+  margin: 0;
+  width: 100%;
+  background-color: rgb(168, 186, 187);
+}
+
+.img-wrapper{
+  width: 80%;
+  margin: 5% 5% 5% 10%;
+  position: relative;
+}
+
+.img-zoom-lens{
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  width: 10px;
+  height: 10px;
+}
+
+.img-zoom-result{
+  background-color: teal;
+  width: 400px;
+  height: 400px;
+  float: right;
+}

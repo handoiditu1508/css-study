@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Magnifier</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+  <script src='script.js'></script>
+</head>
+
+<body>
+  <div class="img-wrapper">
+    <img src="animals.jpg" alt="" id="img-original" width="650px" height="400px">
+    <div id="img-zoom" class="img-zoom-result"></div>
+  </div>
+  <script>
+    imageZoom("img-original", "img-zoom");
+  </script>
+</body>
+
+</html>
