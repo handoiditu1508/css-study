@@ -10,6 +10,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background: #acbaca;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .clock {
