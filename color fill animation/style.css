@@ -1,3 +1,10 @@
+.preload-image {
+  background-image: url(image-mask.png);
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
 button {
   padding: 0.5rem 1rem;
   margin-bottom: 3rem;
@@ -15,11 +22,11 @@ img {
 .color-image {
   position: absolute;
   inset: 0;
-  background-image: url("images/color-image.jpg");
+  background-image: url(color-image.jpg);
   background-size: cover;
 
-  mask-image: url("images/image-mask.png");
-  -webkit-mask-image: url("images/image-mask.png");
+  mask-image: url(image-mask.png);
+  -webkit-mask-image: url(image-mask.png);
   mask-size: cover;
   -webkit-mask-size: cover;
   mask-position: 0% 0%;
